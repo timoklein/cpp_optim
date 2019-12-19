@@ -4,5 +4,21 @@ project(cpp_optim LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
 
-add_executable(cpp_optim main.cpp)
+# Source files
+set( project_sources
+   main.cpp
+   src/optimizer.hpp
+   src/gradientdescent.hpp
+   src/gaussnewton.hpp
+   src/optimizer.cpp
+   src/gradientdescent.cpp
+   src/gaussnewton.cpp
+)
+
+# Create executable with all necessary source files
+add_executable(${PROJECT_NAME}
+  ${project_sources}
+)
