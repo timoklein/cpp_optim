@@ -13,9 +13,13 @@ set( project_sources
    src/optimizer.hpp
    src/gradientdescent.hpp
    src/gaussnewton.hpp
+   src/functions.hpp
+   src/conjugategradient.hpp
    src/optimizer.cpp
+   src/conjugategradient.cpp
    src/gradientdescent.cpp
    src/gaussnewton.cpp
+   src/functions.cpp
 )
 
 # Create executable with all necessary source files

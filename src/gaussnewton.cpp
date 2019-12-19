@@ -1,4 +1,4 @@
-#include "src/gaussnewton.hpp"
+#include "gaussnewton.hpp"
 
 GaussNewton::GaussNewton()
 {

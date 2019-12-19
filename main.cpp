@@ -1,47 +1,38 @@
 #include <iostream>
-#include <array>
-#include <cmath>
-#include <vector>
-#include <numeric>
-
-const std::array<std::array<double, 2>, 5> S {{
-    {-3.30706291, -9.51361457},
-    {0.72401805, -6.21446846},
-    {0.70018933, -2.67522738},
-    {3.78531809, -4.90713787},
-    {3.22303997, 8.09547132}
-}};
-
-const std::array<double, 5> U {12.19150509, 7.19722565, 4.5, 6.66204255, 8.23307692};
-
-template<std::size_t OBS, std::size_t DIM>
-double h_value (std::vector<double> x,
-                const std::array<std::array<double, DIM>, OBS> &S,
-                const std::array<double,OBS> &U)
-{
-    std::vector<double> temp;
-    for (size_t i {0}; i < OBS; i++){
-
-    }
-    double val {std::accumulate(std::begin(temp), std::end(temp), 0.0)};
-    return val;
-}
-
-template<std::size_t OBS, std::size_t DIM>
-double h_grad (std::vector<double> x,
-               const std::array<std::array<double,
-               DIM>, OBS> &S, const std::array<double,OBS> &U)
-{
-    std::vector<double> temp;
-    for (size_t i {0}; i < OBS; i++){
-
-    }
-    double val {std::accumulate(std::begin(temp), std::end(temp), 0.0)};
-    return val;
-}
+#include <src/functions.hpp>
 
 int main()
 {
-    std::cout << "Hello World!" << std::endl;
+    std::vector<std::vector<int>> v1 {
+        {
+            {1,2},
+            {3,4}
+        }
+    };
+    std::vector<std::vector<int>> v2 {
+        {
+            {1,0},
+            {0,1}
+        }
+    };
+    double s {2};
+    /*
+    auto result1 {Functions::scalar_mult(s, v1)};
+    std::cout << "Scalar multiplication" << std::endl;
+    for (const auto &e: result1)
+        std::cout << e << std::endl;
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "Dot product" << std::endl;
+    double result2 {Functions::dot(v1, v2)};
+    std::cout << result2 << std::endl;
+    */
+    std::cout << "-------------------------------" << std::endl;
+    std::cout << "Matrix multiplication" << std::endl;
+    auto result3 {Functions::matmul(v1, v2)};
+    for (const auto &i: result3){
+        for (const auto &j: i)
+            std::cout << j << std::endl;
+    }
+    std::cout << "-------------------------------" << std::endl;
     return 0;
 }
