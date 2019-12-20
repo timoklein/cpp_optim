@@ -5,6 +5,7 @@
 class GaussNewton : public Optimizer
 {
 public:
+
     GaussNewton();
 };
 

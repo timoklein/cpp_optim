@@ -7,6 +7,7 @@
 class Optimizer
 {
 private:
+    // TODO: Implement the basics here with params as private members
     double _line_search();
 
 
