@@ -4,8 +4,9 @@
 #include <src/functions.hpp>
 #include <eigen3/Eigen/Dense>
 
+#include "src/conjugategradient.hpp"
 #include "src/gradientdescent.hpp"
-#include <src/returnvalue.hpp>
+#include "src/returnvalue.hpp"
 
 void function_tests(const Eigen::VectorXd &x, const Eigen::MatrixXd &S, const Eigen::VectorXd &u){
     double r1 {Functions::h_val(x, S, u)};
@@ -35,8 +36,8 @@ int main()
     auto grad_func {std::bind(Functions::h_grad, _1, S, u)};
 
 
-    GradientDescent gd {1e-4};
-    ReturnValue res {gd.optimize(x, obj_func, grad_func)};
+    ConjugateGradient cg {1e-4};
+    ReturnValue res {cg.optimize(x, obj_func, grad_func)};
     std::cout << "Optimization steps: " << res.iterations << std::endl;
 
     return 0;

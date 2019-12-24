@@ -17,7 +17,6 @@ set( project_sources
    src/gaussnewton.hpp
    src/functions.hpp
    src/conjugategradient.hpp
-   src/conjugategradient.cpp
    src/gaussnewton.cpp
    src/functions.cpp
 )
