@@ -1,9 +1,10 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
-#include <src/functions.hpp>
 #include <eigen3/Eigen/Dense>
 
+#include <src/functions.hpp>
+#include <src/gaussnewton.hpp>
 #include "src/conjugategradient.hpp"
 #include "src/gradientdescent.hpp"
 #include "src/returnvalue.hpp"
@@ -31,14 +32,23 @@ int main()
     Eigen::VectorXd u(5);
     u << 12.19150509, 7.19722565, 4.5, 6.66204255, 8.23307692;
 
-    Eigen::Vector2d x(0.0, 0.0);
-    auto obj_func {std::bind(Functions::h_val, _1, S, u)};
-    auto grad_func {std::bind(Functions::h_grad, _1, S, u)};
+    Eigen::Vector2d x(2.0, 5.0);
+//    auto obj_func {std::bind(Functions::h_val, _1, S, u)};
+//    auto grad_func {std::bind(Functions::h_grad, _1, S, u)};
 
+    std::cout << "Gauss Newton" << std::endl;
+    GaussNewton gn {1e-4};
+    ReturnValue res1 {gn.optimize(x, Functions::nls_val, Functions::nls_grad, Functions::Dr)};
+    std::cout << "------------------------------------------\n" << std::endl ;
 
+    std::cout << "Conjugate Gradient" << std::endl;
     ConjugateGradient cg {1e-4};
-    ReturnValue res {cg.optimize(x, obj_func, grad_func)};
-    std::cout << "Optimization steps: " << res.iterations << std::endl;
+    ReturnValue res2 {cg.optimize(x, Functions::nls_val, Functions::nls_grad)};
+    std::cout << "------------------------------------------\n" << std::endl ;
+
+    std::cout << "Gradient Descent" << std::endl;
+    GradientDescent gd {1e-4};
+    ReturnValue res3 {gd.optimize(x, Functions::nls_val, Functions::nls_grad)};
 
     return 0;
 }

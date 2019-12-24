@@ -12,7 +12,7 @@ public:
     ~ConjugateGradient() = default;
 
     template<typename Function1, typename Function2>
-    ReturnValue optimize(Eigen::Vector2d &x_0,
+    ReturnValue optimize(const Eigen::Vector2d &x_0,
                          Function1 obj_func, Function2 grad_func){
         size_t k {0};
         Eigen::Vector2d x {x_0};
@@ -25,10 +25,10 @@ public:
             d = -f_grad_new + (f_grad_new.squaredNorm()/f_grad.squaredNorm())*d;
             f_grad = f_grad_new;
             k += 1;
-            std::cout << "Iteration: " << k << std::endl;
         }
 
         ReturnValue result {x, obj_func(x), k};
+        display_result(result);
         return result;
     }
 

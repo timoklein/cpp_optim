@@ -11,14 +11,13 @@ set(CMAKE_AUTOMOC ON)
 # Source files
 set( project_sources
    main.cpp
+   src/functions.hpp
+   src/functions.cpp
    src/returnvalue.hpp
    src/optimizer.hpp
    src/gradientdescent.hpp
    src/gaussnewton.hpp
-   src/functions.hpp
    src/conjugategradient.hpp
-   src/gaussnewton.cpp
-   src/functions.cpp
 )
 
 # Create executable with all necessary source files

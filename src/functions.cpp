@@ -26,14 +26,22 @@ namespace Functions
         return 4*gradient;
     }
 
+
     double nls_val (const Eigen::Vector2d &x){
-        Eigen::Vector2d val(10*(x(1) - std::pow(x(0), 2)), 1 - x(0));
-        return 0.5*val.squaredNorm();
-    }
+            Eigen::Vector2d val(10*(x(1) - std::pow(x(0), 2)), 1 - x(0));
+            return 0.5*val.squaredNorm();
+        }
 
     Eigen::Vector2d nls_grad (const Eigen::Vector2d &x) {
         return Eigen::Vector2d(200*(std::pow(x(0), 3) - x(0)*x(1)) + x(0) - 1,
                                100*(x(1) - std::pow(x(0), 2)));
+    }
+
+    Eigen::Matrix2d Dr(const Eigen::Vector2d &x){
+        Eigen::Matrix2d val;
+        val << -20*x(0), 10,
+                -1, 0;
+        return val;
     }
 
 }

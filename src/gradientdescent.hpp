@@ -1,9 +1,12 @@
 #pragma once
-#include <iostream>
 #include "optimizer.hpp"
 #include "returnvalue.hpp"
 
 
+/*
+ * class GradientDescent
+ * Plain gradient descent optimization algorithm.
+ */
 class GradientDescent : public Optimizer
 {
 private:
@@ -25,10 +28,10 @@ public:
             f_grad = grad_func(x);
             d = -f_grad;
             k += 1;
-            std::cout << "Iteration: " << k << std::endl;
         }
 
         ReturnValue result {x, obj_func(x), k};
+        display_result(result);
         return result;
     }
 };
