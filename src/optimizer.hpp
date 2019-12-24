@@ -39,6 +39,8 @@ protected:
                   << std::right << std::setw(20) << crit_val.str() << std::endl;
         std::cout << std::left << std::setw(20) << "Function Value"
                   << std::right << std::setw(20) << r.f_crit << std::endl;
+        std::cout << std::left << std::setw(20) << "Wall Time"
+                  << std::right << std::setw(20) << r.wall_time << std::endl;
     }
 
     /*

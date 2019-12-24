@@ -9,19 +9,7 @@
 #include "src/gradientdescent.hpp"
 #include "src/returnvalue.hpp"
 
-void function_tests(const Eigen::VectorXd &x, const Eigen::MatrixXd &S, const Eigen::VectorXd &u){
-    double r1 {Functions::h_val(x, S, u)};
-    std::cout << r1 << std::endl;
-    Eigen::Vector2d r2 {Functions::h_grad(x, S, u)};
-    std::cout << r2 << std::endl;
-    double r3 {Functions::nls_val(x)};
-    std::cout << r3 << std::endl;
-    Eigen::Vector2d r4 {Functions::nls_grad(x)};
-    std::cout << r4 << std::endl;
-}
-
-int main()
-{
+void run_location(){
     using namespace std::placeholders;
     Eigen::MatrixXd S(5,2);
     S << -3.30706291, -9.51361457,
@@ -32,10 +20,23 @@ int main()
     Eigen::VectorXd u(5);
     u << 12.19150509, 7.19722565, 4.5, 6.66204255, 8.23307692;
 
-    Eigen::Vector2d x(2.0, 5.0);
-//    auto obj_func {std::bind(Functions::h_val, _1, S, u)};
-//    auto grad_func {std::bind(Functions::h_grad, _1, S, u)};
+    Eigen::Vector2d x(0.0, 0.0);
+    auto obj_func {std::bind(Functions::h_val, _1, S, u)};
+    auto grad_func {std::bind(Functions::h_grad, _1, S, u)};
 
+    std::cout << "Conjugate Gradient" << std::endl;
+    ConjugateGradient cg {1e-4};
+    ReturnValue res2 {cg.optimize(x, obj_func, grad_func)};
+    std::cout << "------------------------------------------\n" << std::endl ;
+
+    std::cout << "Gradient Descent" << std::endl;
+    GradientDescent gd {1e-4};
+    ReturnValue res3 {gd.optimize(x, obj_func, grad_func)};
+
+}
+
+void run_rosenbrock(){
+    Eigen::Vector2d x(2.0, 5.0);
     std::cout << "Gauss Newton" << std::endl;
     GaussNewton gn {1e-4};
     ReturnValue res1 {gn.optimize(x, Functions::nls_val, Functions::nls_grad, Functions::Dr)};
@@ -49,6 +50,14 @@ int main()
     std::cout << "Gradient Descent" << std::endl;
     GradientDescent gd {1e-4};
     ReturnValue res3 {gd.optimize(x, Functions::nls_val, Functions::nls_grad)};
+
+}
+
+int main()
+{
+//    run_location();
+
+    run_rosenbrock();
 
     return 0;
 }

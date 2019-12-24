@@ -8,6 +8,7 @@ using namespace Eigen;
 
 namespace Functions
 {
+    // Location Problem
     double h_val (const Eigen::Vector2d &x, const Eigen::MatrixXd &S, const Eigen::VectorXd &u){
         Eigen::VectorXd result(S.rows());
         for (int i {}; i < S.rows(); i++) {
@@ -26,7 +27,8 @@ namespace Functions
         return 4*gradient;
     }
 
-
+    //---------------------------------------------------------------------------
+    // Rosenbrock Function
     double nls_val (const Eigen::Vector2d &x){
             Eigen::Vector2d val(10*(x(1) - std::pow(x(0), 2)), 1 - x(0));
             return 0.5*val.squaredNorm();
