@@ -72,4 +72,4 @@ Thumbs.db
 *.exe
 
 # Documentation notebooks
-.ipy.ipynb_checkpoints/
+.ipynb_checkpoints/
