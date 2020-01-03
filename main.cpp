@@ -53,11 +53,26 @@ void run_rosenbrock(){
 
 }
 
+void run_peano(){
+    Eigen::Vector2d x(1.0, 1.0);
+
+    std::cout << "Conjugate Gradient" << std::endl;
+    ConjugateGradient cg {1e-4};
+    ReturnValue res2 {cg.optimize(x, Functions::p_val, Functions::p_grad)};
+    std::cout << "------------------------------------------\n" << std::endl ;
+
+    std::cout << "Gradient Descent" << std::endl;
+    GradientDescent gd {1e-4};
+    ReturnValue res3 {gd.optimize(x, Functions::p_val, Functions::p_grad)};
+
+}
+
 int main()
 {
 //    run_location();
 
-    run_rosenbrock();
+//    run_rosenbrock();
+    run_peano();
 
     return 0;
 }

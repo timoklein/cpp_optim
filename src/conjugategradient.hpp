@@ -9,7 +9,7 @@ class ConjugateGradient : public Optimizer
 private:
     double epsilon;
 public:
-    ConjugateGradient(double epsilon = 0.0): epsilon {epsilon} {}
+    ConjugateGradient(double epsilon = 0.0, size_t max_iter=1000): Optimizer(max_iter), epsilon {epsilon} {}
     ~ConjugateGradient() = default;
 
     /* \fn template<typename Function1, typename Function2>
@@ -37,6 +37,8 @@ public:
             Eigen::Vector2d f_grad_new {grad_func(x)};
             d = -f_grad_new + (f_grad_new.squaredNorm()/f_grad.squaredNorm())*d;
             f_grad = f_grad_new;
+            if (_check_iterations(k))
+                break;
             k += 1;
         }
         auto end {std::chrono::high_resolution_clock::now()};

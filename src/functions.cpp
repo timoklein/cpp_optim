@@ -46,6 +46,18 @@ namespace Functions
         return val;
     }
 
+    //----------------------------------------------------------------------------------
+    // Peano's function
+
+    double p_val (const Eigen::Vector2d &x){
+        return (std::pow(x(0), 2) - x(1))*(std::pow(x(0), 2) - 3*x(1));
+    }
+
+    Eigen::Vector2d p_grad (const Eigen::Vector2d &x){
+        Eigen::Vector2d val(std::pow(x(0), 3) - 8*x(0)*x(1), -4*std::pow(x(0), 2) + 6*x(1));
+        return val;
+    }
+
 }
 
 

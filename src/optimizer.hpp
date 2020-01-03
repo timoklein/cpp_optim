@@ -18,6 +18,8 @@ class Optimizer
 {
 protected:
 
+    size_t max_iter;
+
     /*
      * \fn void display_result(const ReturnValue &r)
      * ---------------------------------------------
@@ -41,6 +43,14 @@ protected:
                   << std::right << std::setw(20) << r.f_crit << std::endl;
         std::cout << std::left << std::setw(20) << "Wall Time"
                   << std::right << std::setw(20) << r.wall_time << std::endl;
+    }
+
+    bool _check_iterations(const size_t &i){
+        if (i > max_iter - 1){
+            std::cout << "The maximum number of iterations (" << max_iter << ") has been exceeded." << std::endl;
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -82,6 +92,8 @@ protected:
 
         return t;
     }
+
+    Optimizer(size_t max_iter=1000): max_iter {max_iter} {}
 
 };
 

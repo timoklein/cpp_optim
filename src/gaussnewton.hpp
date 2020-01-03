@@ -9,7 +9,7 @@ class GaussNewton : public Optimizer
     private:
         double epsilon;
     public:
-        GaussNewton(double epsilon = 0.0): epsilon {epsilon} {}
+        GaussNewton(double epsilon = 0.0, size_t max_iter=1000): Optimizer(max_iter), epsilon {epsilon} {}
         ~GaussNewton() = default;
 
         /* \fn template<typename Function>
@@ -53,6 +53,8 @@ class GaussNewton : public Optimizer
                 x += t*d;
                 f_grad = grad_func(x);
                 d = _get_d<Function3>(x, f_grad, Dr);
+                if (_check_iterations(k))
+                    break;
                 k += 1;
             }
             auto end {std::chrono::high_resolution_clock::now()};
